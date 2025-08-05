@@ -3,6 +3,8 @@ import * as fs from 'fs';
 import checkoutTestCase from '../utils/checkoutTestCase';
 import { parse } from 'csv-parse/sync';
 
+const baseURL = 'http://localhost:4200/#/';
+
 // Hàm đọc dữ liệu từ CSV
 function readTestCasesFromCSV(): checkoutTestCase[] {
   const fileContent = fs.readFileSync('checkout_testcases.csv', { encoding: 'utf8' });
@@ -15,7 +17,7 @@ function readTestCasesFromCSV(): checkoutTestCase[] {
 
 // Hàm đăng nhập
 async function login(page: Page): Promise<void> {
-  await page.goto('http://localhost:4200/#/auth/login');
+  await page.goto(`${baseURL}auth/login`);
   await page.locator('[data-test="email"]').fill('customer2@practicesoftwaretesting.com');
   await page.locator('[data-test="password"]').fill('welcome01');
   await page.click('[data-test="login-submit"]');
@@ -25,7 +27,7 @@ async function login(page: Page): Promise<void> {
 
 // Hàm thêm sản phẩm vào giỏ hàng
 async function addToCart(page: Page): Promise<void> {
-  await page.goto('http://localhost:4200/#/product/1');
+  await page.goto(`${baseURL}product/1`);
 
   await page.click('[data-test="add-to-cart"]');
 }
@@ -109,7 +111,7 @@ async function executeCheckoutTestCase(page: Page, testCase: checkoutTestCase): 
   await addToCart(page);
 
   // Điều hướng đến trang checkout
-  await page.goto('http://localhost:4200/#/checkout');
+  await page.goto(`${baseURL}checkout`);
   await page.click('[data-test="proceed-1"]');
 
   const loggedInMessage = page.locator('p:has-text("already logged in. You can proceed to checkout.")');
