@@ -1,0 +1,11 @@
+testId,testName,precondition,address,city,state,country,postcode,payment_method,account_name,account_number,expectedResult
+CO_EP_01,Valid Checkout (Logged In),"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Credit Card,John Doe,1234567890123456,Payment was successful
+CO_EP_02,Empty Address (Logged In),"User logged in, cart with items",,New York,NY,USA,12345,Credit Card,John Doe,1234567890123456,Error: Address is required
+CO_EP_03,Empty Country (Logged In),"User logged in, cart with items",123 Main St,New York,NY,,12345,Credit Card,John Doe,1234567890123456,Error: Country is required
+CO_EP_04,Invalid Payment Method,"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Errror 304 - Missing Payment Gateway,John Doe,1234567890123456,Error: Invalid payment method
+CO_EP_05,Account Number has letters/invalid character,"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Credit Card,John Doe,1234567890123456d,Error: Invalid account number
+CO_BVA_01,Account Number at Max Length (20-char-string),"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Credit Card,John Doe,1234567891234567812,Payment was successful
+CO_BVA_02,Account Number Over Max Length (21-char-string),"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Credit Card,John Doe,12345678912345678123,Error: Account number too long
+CO_BVA_03,Postcode at Max Length (Logged In) (10-char string),"User logged in, cart with items",123 Main St,New York,NY,USA,1234567890,Credit Card,John Doe,1234567890123456,Payment was successful
+CO_BVA_04,Postcode Over Max Length (Logged In) (11-char-string),"User logged in, cart with items",123 Main St,New York,NY,USA,12345678901,Credit Card,John Doe,1234567890123456,Error: Postcode too long
+CO_BVA_05,Account Name Max Length (Logged In) (70-char-string),"User logged in, cart with items",123 Main St,New York,NY,USA,12345,Credit Card,Maximilian Christopher Alexander Featherstone-Wellington III,1234567890123456,Payment was successful

@@ -1,0 +1,15 @@
+testId,testName,precondition,first_name,last_name,dob,address,city,country,state,postcode,phone,email,password,expectedResult
+CR_EP_01,Valid Registration,User not registered,John,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe12@example.com,Password123,Registration successful
+CR_EP_02,Empty First Name,User not registered,,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe@example.com,Password123,Error: First name is required
+CR_EP_03,Last name contains numbers,User not registered,Jane,Doe3,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe@example.com,Password123,Error: Invalid character
+CR_EP_04,Invalid Email Format,User not registered,Jane,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe.example.com,Password123,Error: E-mail format is invalid.
+CR_EP_05,Registration fails with existing email,"Email customer@practicesoftwaretesting.com
+ already exists",Jane,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,customer@practicesoftwaretesting.com,welcome01,Error: A customer with this email address already exists.
+CR_EP_06,Registration fails with case-insensitive email,"Email customer@practicesoftwaretesting.com
+ already exists",Jane,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,CustomeR@practicesoftwaretesting.com,welcome01,Error: A customer with this email address already exists.
+CR_EP_07,Empty Address,User not registered,Jane,Doe,1995-01-01,,New York,USA,United States of America (the),12345,1234567890,john.doe@example.com,Password123,Error: Address is required.
+CR_BVA_01,First Name at Max Length,User not registered,MaximilianoChristopherAndersonJulius,Doe,1995-01-01,123  Main St,New York,USA,United States of America (the),12345,1234567890,john.doe@example.com,Password123,Registration successful
+CR_BVA_02,First Name Over Max Length,User not registered,MaximilianoChristopherAndersonJuliuss,Doe,1995-01-01,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe@example.com,Password123,Error: The first name field must not be greater than 40 characters.
+CR_BVA_03,Date of birth is 18,User not registered,Jane,Doe,2007-08-03,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doe18@example.com,Password123,Registration successful
+CR_BVA_04,Date of birth younger than 18,User not registered,Jane,Doe,2007-08-05,123 Main Str,New York,USA,United States of America (the),12345,1234567890,john.doeu18@example.com,Password123,Error: Customer must be 18 years old.
+CR_BVA_05,Password is min length,User not registered,Jane,Doe,2007-06-17,123 Main St,New York,USA,United States of America (the),12345,1234567890,john.doemin@example.com,12345678,Registration successful
